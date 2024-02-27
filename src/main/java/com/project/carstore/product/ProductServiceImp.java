@@ -56,35 +56,35 @@ public class ProductServiceImp implements ProductService {
         {
             throw new ProductException("Product ID cannot be null");
         }
-        Optional<Product> findProduct=this.productRepository.findById(productId);
-        if(findProduct.isPresent())
+        Optional<Product> foundProduct=this.productRepository.findById(productId);
+        if(foundProduct.isPresent())
         {
             //set color
             if(productDetails.getColour()!=null)
             {
-                findProduct.get().setColour(productDetails.getColour());
+                foundProduct.get().setColour(productDetails.getColour());
             }
             //set price
             if(productDetails.getPrice()!=null)
             {
-                findProduct.get().setPrice(productDetails.getPrice());
+                foundProduct.get().setPrice(productDetails.getPrice());
             }
             //set des
             if(productDetails.getDescription()!=null)
             {
-                findProduct.get().setDescription(productDetails.getDescription());
+                foundProduct.get().setDescription(productDetails.getDescription());
             }
             //set qty
             if(productDetails.getQuantity()!=null)
             {
-                findProduct.get().setQuantity(productDetails.getQuantity());
+                foundProduct.get().setQuantity(productDetails.getQuantity());
             }
             //set url
             if(productDetails.getImageUrl()!=null)
             {
-                findProduct.get().setImageUrl(productDetails.getImageUrl());
+                foundProduct.get().setImageUrl(productDetails.getImageUrl());
             }
-            return this.productRepository.save(findProduct.get());
+            return this.productRepository.save(fondProduct.get());
         }else {
             throw new ProductException("No product exist with Id:"+productDetails.getProductId());
         }
