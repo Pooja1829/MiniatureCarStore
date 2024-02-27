@@ -56,7 +56,7 @@ public class ProductServiceImp implements ProductService {
         foundProduct.get().setImageUrl(productDto.getImageUrl());
         foundProduct.get().setQuantity(productDto.getQuantity());
         //save the product object to database
-        return this.productRepository.save(.get());
+        return this.productRepository.save(foundProduct.get());
     }
 
     @Override
