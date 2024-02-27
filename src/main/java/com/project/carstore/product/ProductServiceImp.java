@@ -48,15 +48,15 @@ public class ProductServiceImp implements ProductService {
             throw new ProductException("Product cannot be null");
         }
         // get product from databse using productID
-        Optional<Product> findProduct=this.productRepository.findById(productDto.getId());
-        findProduct.get().setName(productDto.getName());
-        findProduct.get().setPrice(productDto.getPrice());
-        findProduct.get().setDescription(productDto.getDescription());
-        findProduct.get().setColour(productDto.getColour());
-        findProduct.get().setImageUrl(productDto.getImageUrl());
-        findProduct.get().setQuantity(productDto.getQuantity());
+        Optional<Product> foundProduct=this.productRepository.findById(productDto.getId());
+        foundProduct.get().setName(productDto.getName());
+        foundProduct.get().setPrice(productDto.getPrice());
+        foundProduct.get().setDescription(productDto.getDescription());
+        foundProduct.get().setColour(productDto.getColour());
+        foundProduct.get().setImageUrl(productDto.getImageUrl());
+        foundProduct.get().setQuantity(productDto.getQuantity());
         //save the product object to database
-        return this.productRepository.save(findProduct.get());
+        return this.productRepository.save(foundProduct.get());
     }
 
     @Override
