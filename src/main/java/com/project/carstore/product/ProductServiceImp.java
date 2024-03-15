@@ -13,7 +13,7 @@ public class ProductServiceImp implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public Product addProductToDb(Product product) throws ProductException {
+    public Product addProductToDb(ProductDTO product) throws ProductException {
         //handle exception here
         if(product==null)
         {
@@ -41,22 +41,50 @@ public class ProductServiceImp implements ProductService {
     }
 
     @Override
-    public Product updateProductInDb(ProductDTO productDto) throws ProductException {
+    public Product updateProductInDb(UpdateProductDTO productDetails) throws ProductException {
         //handle exceptions
-        if(productDto==null)
+        if(productDetails==null)
         {
             throw new ProductException("Product cannot be null");
         }
-        // get product from databse using productID
-        Optional<Product> foundProduct=this.productRepository.findById(productDto.getId());
-        foundProduct.get().setName(productDto.getName());
-        foundProduct.get().setPrice(productDto.getPrice());
-        foundProduct.get().setDescription(productDto.getDescription());
-        foundProduct.get().setColour(productDto.getColour());
-        foundProduct.get().setImageUrl(productDto.getImageUrl());
-        foundProduct.get().setQuantity(productDto.getQuantity());
-        //save the product object to database
-        return this.productRepository.save(foundProduct.get());
+        Long productId= productDetails.getProductId();
+        if(productId==null)
+        {
+            throw new ProductException("Product ID cannot be null");
+        }
+        Optional<Product> foundProduct=this.productRepository.findById(productId);
+        if(foundProduct.isPresent())
+        {
+            //set color
+            if(productDetails.getColour()!=null)
+            {
+                foundProduct.get().setColour(productDetails.getColour());
+            }
+            //set price
+            if(productDetails.getPrice()!=null)
+            {
+                foundProduct.get().setPrice(productDetails.getPrice());
+            }
+            //set des
+            if(productDetails.getDescription()!=null)
+            {
+                foundProduct.get().setDescription(productDetails.getDescription());
+            }
+            //set qty
+            if(productDetails.getQuantity()!=null)
+            {
+                foundProduct.get().setQuantity(productDetails.getQuantity());
+            }
+            //set url
+            if(productDetails.getImageUrl()!=null)
+            {
+                foundProduct.get().setImageUrl(productDetails.getImageUrl());
+            }
+            return this.productRepository.save(foundProduct.get());
+        }else {
+            throw new ProductException("No product exist with Id:"+productDetails.getProductId());
+        }
+
     }
 
     @Override

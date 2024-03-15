@@ -1,12 +1,14 @@
 package com.project.carstore.product;
 
+
+
 import java.util.List;
 
 public interface ProductService {
 
-    public Product addProductToDb(Product product) throws ProductException;
-    public Product deleteProductFromDb(Long id) throws ProductException;
-    public Product updateProductInDb(ProductDTO productDto) throws ProductException;
+    public Product addProductToDb(ProductDTO product) throws ProductException;
+    public Product deleteProductFromDb(Long Id) throws ProductException;
+    public Product updateProductInDb(UpdateProductDTO productDetails) throws ProductException;
     Product getProductById(Long id) throws ProductException;
     List<Product> getAllProducts() throws ProductException;
     List<Product> getAllProductsByPrice(Double price) throws ProductException;
@@ -14,5 +16,6 @@ public interface ProductService {
     List<Product> getAllProductsSortedByPrice() throws ProductException;
     List<Product> getAllProductsByName(String name) throws ProductException;
     List<Product> getAllProductsByDescription(String description) throws ProductException;
+
 
 }
