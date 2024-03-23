@@ -2,6 +2,9 @@ package com.project.carstore.product;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 @Entity
 public class Product {
     @Id
